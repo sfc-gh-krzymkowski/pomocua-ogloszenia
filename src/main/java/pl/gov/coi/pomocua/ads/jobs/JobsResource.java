@@ -1,18 +1,20 @@
 package pl.gov.coi.pomocua.ads.jobs;
 
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
-@RestController
+@RestController()
 @RequiredArgsConstructor
-@RequestMapping("/api/")
+@RequestMapping(value = "/api/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class JobsResource {
     private final JobsRepository repository;
 
@@ -29,7 +31,7 @@ public class JobsResource {
     }
 
     @GetMapping("jobs/{id}")
-    public Optional<JobOffer> list(@PathVariable Long id) {
+    public Optional<JobOffer> get(@PathVariable Long id) {
         return repository.findById(id);
     }
 }
